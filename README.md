@@ -238,3 +238,33 @@ ___
 * Whatever you want but first make sure to have your own branch a/o fork.
 
 * Feel free to report using [Issues](https://github.com/L-EARN/NoCheatZ-4/issues) if you see anything you think is not good, for a feature request or just some help.
+
+
+
+////
+
+git clone --depth=50 --branch=master https://github.com/xMaZax/NoCheatZ-4.git xMaZax/NoCheatZ-4
+cd xMaZax/NoCheatZ-4
+git checkout -qf master
+git submodule update --init --recursive
+export CXX=g++
+export CC=gcc
+g++ --version
+sudo rm /etc/apt/sources.list.d/google-chrome.list
+sudo dpkg --add-architecture i386
+sudo apt-get -qq update
+sudo apt-get -qq install -y build-essential cppcheck g++-4.8 g++-multilib linux-libc-dev libc6-dev-i386 lib32z1-dev lib32stdc++6
+git fetch --tags
+git tag
+cd scripts
+python version.py
+cd ../server-plugin
+sh ../scripts/make-protobuf.sh
+make debug-ci (Только если protofub скомпилен)
+
+
+wget https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz
+tar -xvzf protobuf-2.5.0.tar.gz
+cd protobuf-2.5.0
+./configure --build=i686-pc-linux-gnu CFLAGS="-m32 -DNDEBUG" CXXFLAGS="-m32 -DNDEBUG" LDFLAGS=-m32
+make
