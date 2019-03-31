@@ -35,7 +35,7 @@ ADD_DEFINITIONS(
   -I${PROJECT_SOURCE_DIR}/Code
   -I${PROJECT_SOURCE_DIR}/SourceSdk
   -I${PROJECT_SOURCE_DIR}/SourceSdk/Interfaces/Protobuf
-  -I${PROJECT_SOURCE_DIR}/SourceSdk/Interfaces/Protobuf/protobuf-2.5.0/src
+  -I${PROJECT_SOURCE_DIR}/SourceSdk/Interfaces/Protobuf/protobuf-3.7.1/src
 )
 
 execute_process(COMMAND git submodule update --init)
@@ -56,7 +56,7 @@ ADD_LIBRARY(nocheatzX SHARED ${server-plugin_SRC})
 set_target_properties(nocheatzX PROPERTIES
   PREFIX ""
 )
-target_link_libraries(nocheatzX ${CMAKE_DL_LIBS} "${PROJECT_SOURCE_DIR}/SourceSdk/Interfaces/Protobuf/protobuf-2.5.0/src/.libs/libprotobuf.a")
+target_link_libraries(nocheatzX ${CMAKE_DL_LIBS} "${PROJECT_SOURCE_DIR}/SourceSdk/Interfaces/Protobuf/protobuf-3.7.1/src/.libs/libprotobuf.a")
 set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--as-needed,--no-undefined -static-libgcc -ldl -lm -m32")
 message ("compiling protobuf")
 execute_process(
