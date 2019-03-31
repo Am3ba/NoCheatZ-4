@@ -93,7 +93,7 @@ SRC := $(filter-out Code/Misc/StackWalker.cpp, $(SRC))
 INCLUDE =       -I$(SRC_DIR) \
 		-I$(SDK_DIR) \
 		-I$(SDK_DIR)/Interfaces/Protobuf \
-		-I$(SDK_DIR)/Interfaces/Protobuf/protobuf-2.5.0/src
+		-I$(SDK_DIR)/Interfaces/Protobuf/protobuf-3.7.1/src
 
 ###########################################################
 # Output rules                                            #
@@ -171,11 +171,11 @@ unit-tests: prepare-build
 	@echo "Building unit-tests"
 	@mkdir -p ./unit-tests/Release
 	@echo "gtest-all.o"
-	@$(d_CXX) -I./SourceSdk/Interfaces/Protobuf/protobuf-2.5.0/gtest/include -I./SourceSdk/Interfaces/Protobuf/protobuf-2.5.0/gtest $(ARCH_CFLAGS) -o ./unit-tests/Release/gtest-all.o -c ./SourceSdk/Interfaces/Protobuf/protobuf-2.5.0/gtest/src/gtest-all.cc
+	@$(d_CXX) -I./SourceSdk/Interfaces/Protobuf/protobuf-3.7.1/gtest/include -I./SourceSdk/Interfaces/Protobuf/protobuf-3.7.1/gtest $(ARCH_CFLAGS) -o ./unit-tests/Release/gtest-all.o -c ./SourceSdk/Interfaces/Protobuf/protobuf-3.7.1/gtest/src/gtest-all.cc
 	@echo "HeapMemoryManager.o"
 	@$(d_CXX) -I./Code/ -I./SourceSdk/ $(ARCH_CFLAGS) -o ./unit-tests/Release/HeapMemoryManager.o -c ./Code/Misc/HeapMemoryManager.cpp
 	@echo "unit-tests.o"
-	@$(d_CXX) -I./Code/ -I./SourceSdk/ -I./SourceSdk/Interfaces/Protobuf/protobuf-2.5.0/gtest/include -I./SourceSdk/Interfaces/Protobuf/protobuf-2.5.0/gtest $(ARCH_CFLAGS) -D__assume=Assert -o ./unit-tests/Release/unit-tests.o -c ./unit-tests/unit-tests.cpp
+	@$(d_CXX) -I./Code/ -I./SourceSdk/ -I./SourceSdk/Interfaces/Protobuf/protobuf-3.7.1/gtest/include -I./SourceSdk/Interfaces/Protobuf/protobuf-3.7.1/gtest $(ARCH_CFLAGS) -D__assume=Assert -o ./unit-tests/Release/unit-tests.o -c ./unit-tests/unit-tests.cpp
 	@echo "unit-tests.so"
 	@$(d_CXX) $(ARCH_CFLAGS) ./unit-tests/Release/unit-tests.o ./unit-tests/Release/HeapMemoryManager.o ./unit-tests/Release/gtest-all.o -v -Wl,--as-needed,--no-undefined -static-libgcc -ldl -lpthread -lm -m32 -o ./unit-tests/unit-tests
 	@echo "Starting unit-tests"
